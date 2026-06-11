@@ -6,249 +6,56 @@
   <title>Admin — Polla México vs Sudáfrica</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #0a1628;
-      --bg-card: #132035;
-      --bg-input: #1a2d47;
-      --border: rgba(255,255,255,0.10);
-      --border-hover: rgba(255,255,255,0.22);
-      --text: #f0f4ff;
-      --text-muted: rgba(240,244,255,0.55);
-      --gold: #FFB81C;
-      --danger: #ff4d4d;
-      --danger-bg: rgba(255,77,77,0.10);
-      --danger-border: rgba(255,77,77,0.35);
+      --bg: #0a1628; --bg-card: #132035; --bg-input: #1a2d47;
+      --border: rgba(255,255,255,0.10); --border-hover: rgba(255,255,255,0.22);
+      --text: #f0f4ff; --text-muted: rgba(240,244,255,0.55);
+      --gold: #FFB81C; --danger: #ff4d4d;
+      --danger-bg: rgba(255,77,77,0.10); --danger-border: rgba(255,77,77,0.35);
       --success: #4dff91;
     }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      min-height: 100vh;
-      padding-bottom: 3rem;
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem 1.5rem;
-      border-bottom: 0.5px solid var(--border);
-      margin-bottom: 2rem;
-    }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; padding-bottom: 3rem; }
+    .header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; border-bottom: 0.5px solid var(--border); margin-bottom: 2rem; }
     .header-left { display: flex; align-items: center; gap: 12px; }
-    .admin-badge {
-      background: rgba(255,77,77,0.12);
-      border: 0.5px solid rgba(255,77,77,0.35);
-      border-radius: 20px;
-      padding: 3px 12px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: var(--danger);
-    }
-    .header-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .back-link {
-      font-size: 13px;
-      color: var(--text-muted);
-      text-decoration: none;
-      border: 0.5px solid var(--border);
-      border-radius: 8px;
-      padding: 6px 14px;
-      transition: border-color 0.15s, color 0.15s;
-    }
+    .admin-badge { background: var(--danger-bg); border: 0.5px solid var(--danger-border); border-radius: 20px; padding: 3px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--danger); }
+    .header-title { font-size: 15px; font-weight: 600; }
+    .back-link { font-size: 13px; color: var(--text-muted); text-decoration: none; border: 0.5px solid var(--border); border-radius: 8px; padding: 6px 14px; transition: border-color 0.15s, color 0.15s; }
     .back-link:hover { border-color: var(--border-hover); color: var(--text); }
-
     .main { max-width: 620px; margin: 0 auto; padding: 0 1rem; }
-
-    /* stats strip */
-    .stats-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 1.25rem;
-    }
-    .stat {
-      background: var(--bg-card);
-      border: 0.5px solid var(--border);
-      border-radius: 10px;
-      padding: 0.9rem 1rem;
-      text-align: center;
-    }
-    .stat-num {
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--gold);
-    }
-    .stat-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-      margin-top: 2px;
-    }
-
-    .card {
-      background: var(--bg-card);
-      border: 0.5px solid var(--border);
-      border-radius: 14px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
-    .card-title {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-    }
-
-    /* participant rows */
-    .participant-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 0.5px solid var(--border);
-    }
+    .stats-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+    .stat { background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 10px; padding: 0.9rem 1rem; text-align: center; }
+    .stat-num { font-size: 26px; font-weight: 700; color: var(--gold); }
+    .stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; margin-top: 2px; }
+    .card { background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 14px; padding: 1.5rem; margin-bottom: 1.25rem; }
+    .card-title { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.25rem; }
+    .participant-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
     .participant-row:last-child { border-bottom: none; }
     .p-info { display: flex; flex-direction: column; gap: 2px; }
     .p-name { font-size: 14px; font-weight: 600; }
-    .p-score {
-      font-size: 12px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .btn-del {
-      background: var(--danger-bg);
-      border: 0.5px solid var(--danger-border);
-      border-radius: 7px;
-      color: var(--danger);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 5px 12px;
-      cursor: pointer;
-      letter-spacing: 0.04em;
-      transition: background 0.15s;
-    }
+    .p-score { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
+    .btn-del { background: var(--danger-bg); border: 0.5px solid var(--danger-border); border-radius: 7px; color: var(--danger); font-size: 12px; font-weight: 600; padding: 5px 12px; cursor: pointer; transition: background 0.15s; }
     .btn-del:hover { background: rgba(255,77,77,0.2); }
-
-    /* confirm modal inline */
-    .confirm-zone {
-      background: var(--danger-bg);
-      border: 0.5px solid var(--danger-border);
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-      margin-top: 1rem;
-      display: none;
-    }
+    .btn-del:disabled { opacity: 0.4; cursor: not-allowed; }
+    .confirm-zone { background: var(--danger-bg); border: 0.5px solid var(--danger-border); border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1rem; display: none; }
     .confirm-zone.visible { display: block; }
-    .confirm-zone p {
-      font-size: 13px;
-      color: var(--danger);
-      margin-bottom: 0.75rem;
-      font-weight: 600;
-    }
+    .confirm-zone p { font-size: 13px; color: var(--danger); margin-bottom: 0.75rem; font-weight: 600; }
     .confirm-btns { display: flex; gap: 8px; }
-    .btn-confirm-yes {
-      background: var(--danger);
-      border: none;
-      border-radius: 7px;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 7px 16px;
-      cursor: pointer;
-    }
+    .btn-confirm-yes { background: var(--danger); border: none; border-radius: 7px; color: #fff; font-size: 13px; font-weight: 700; padding: 7px 16px; cursor: pointer; }
     .btn-confirm-yes:hover { opacity: 0.85; }
-    .btn-cancel {
-      background: transparent;
-      border: 0.5px solid var(--border-hover);
-      border-radius: 7px;
-      color: var(--text-muted);
-      font-size: 13px;
-      padding: 7px 16px;
-      cursor: pointer;
-    }
+    .btn-cancel { background: transparent; border: 0.5px solid var(--border-hover); border-radius: 7px; color: var(--text-muted); font-size: 13px; padding: 7px 16px; cursor: pointer; }
     .btn-cancel:hover { color: var(--text); }
-
-    .btn-clear-all {
-      width: 100%;
-      height: 40px;
-      border-radius: 8px;
-      border: 0.5px solid var(--danger-border);
-      background: var(--danger-bg);
-      color: var(--danger);
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      letter-spacing: 0.04em;
-      margin-top: 1rem;
-      transition: background 0.15s;
-    }
+    .btn-clear-all { width: 100%; height: 40px; border-radius: 8px; border: 0.5px solid var(--danger-border); background: var(--danger-bg); color: var(--danger); font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 1rem; transition: background 0.15s; }
     .btn-clear-all:hover { background: rgba(255,77,77,0.18); }
-
-    .empty {
-      text-align: center;
-      padding: 2rem;
-      color: var(--text-muted);
-      font-size: 14px;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(60px);
-      background: #1a2d47;
-      border: 0.5px solid var(--border-hover);
-      border-radius: 10px;
-      padding: 10px 20px;
-      font-size: 13px;
-      color: var(--success);
-      font-weight: 600;
-      opacity: 0;
-      transition: transform 0.25s ease, opacity 0.25s ease;
-      pointer-events: none;
-      white-space: nowrap;
-    }
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
-    /* result distribution */
-    .dist-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 0.5px solid var(--border);
-      font-size: 13px;
-    }
+    .dist-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--border); font-size: 13px; }
     .dist-row:last-child { border-bottom: none; }
     .dist-score { font-weight: 700; min-width: 60px; }
     .dist-names { color: var(--text-muted); flex: 1; }
-    .dist-count {
-      background: rgba(255,184,28,0.12);
-      border: 0.5px solid rgba(255,184,28,0.3);
-      border-radius: 20px;
-      padding: 2px 10px;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--gold);
-      min-width: 28px;
-      text-align: center;
-    }
+    .dist-count { background: rgba(255,184,28,0.12); border: 0.5px solid rgba(255,184,28,0.3); border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 700; color: var(--gold); min-width: 28px; text-align: center; }
+    .empty { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 14px; }
+    .loading { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 13px; }
+    .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(60px); background: #1a2d47; border: 0.5px solid var(--border-hover); border-radius: 10px; padding: 10px 20px; font-size: 13px; color: var(--success); font-weight: 600; opacity: 0; transition: transform 0.25s ease, opacity 0.25s ease; pointer-events: none; white-space: nowrap; }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .flag { border-radius: 2px; display: inline-block; }
   </style>
 </head>
 <body>
@@ -262,30 +69,20 @@
 </header>
 
 <main class="main">
-
   <div class="stats-strip">
-    <div class="stat">
-      <div class="stat-num" id="stat-total">0</div>
-      <div class="stat-label">Participantes</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num" id="stat-distinct">0</div>
-      <div class="stat-label">Resultados distintos</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num" id="stat-top">—</div>
-      <div class="stat-label">Más votado</div>
-    </div>
+    <div class="stat"><div class="stat-num" id="stat-total">—</div><div class="stat-label">Participantes</div></div>
+    <div class="stat"><div class="stat-num" id="stat-distinct">—</div><div class="stat-label">Resultados distintos</div></div>
+    <div class="stat"><div class="stat-num" id="stat-top">—</div><div class="stat-label">Más votado</div></div>
   </div>
 
   <div class="card">
     <div class="card-title">Distribución de predicciones</div>
-    <div id="dist-list"><div class="empty">Sin datos aún.</div></div>
+    <div id="dist-list"><div class="loading">Conectando...</div></div>
   </div>
 
   <div class="card">
     <div class="card-title">Participantes</div>
-    <div id="participant-list"><div class="empty">Sin participantes aún.</div></div>
+    <div id="participant-list"><div class="loading">Conectando...</div></div>
     <div class="confirm-zone" id="confirm-all">
       <p>⚠ Esto borrará TODAS las predicciones. No se puede deshacer.</p>
       <div class="confirm-btns">
@@ -295,19 +92,32 @@
     </div>
     <button class="btn-clear-all" onclick="askClearAll()">🗑 Limpiar todos los resultados</button>
   </div>
-
 </main>
 
 <div class="toast" id="toast"></div>
 
-<script>
-  const STORAGE_KEY = 'polla_mundial_2026_picks';
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+  import { getFirestore, collection, deleteDoc, doc, onSnapshot, query, orderBy, writeBatch } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
 
-  function load() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-    catch { return []; }
-  }
-  function save(picks) { localStorage.setItem(STORAGE_KEY, JSON.stringify(picks)); }
+  const firebaseConfig = {
+    apiKey: "AIzaSyA1IUBIUaQAVFI2tFm5XomIQHFmmatXCrI",
+    authDomain: "polla-mundial-5c6e9.firebaseapp.com",
+    projectId: "polla-mundial-5c6e9",
+    storageBucket: "polla-mundial-5c6e9.firebasestorage.app",
+    messagingSenderId: "407653277597",
+    appId: "1:407653277597:web:bf28b9749c04c67635d974"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const picksCol = collection(db, "picks");
+  let allPicks = [];
+
+  onSnapshot(query(picksCol, orderBy("createdAt", "asc")), (snapshot) => {
+    allPicks = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    render();
+  });
 
   function showToast(msg) {
     const t = document.getElementById('toast');
@@ -316,34 +126,31 @@
     setTimeout(() => t.classList.remove('show'), 2200);
   }
 
-  function deletePick(name) {
-    const picks = load().filter(p => p.name !== name);
-    save(picks);
-    render();
-    showToast('"' + name + '" eliminado');
-  }
+  window.deletePick = async function(id, name) {
+    try {
+      await deleteDoc(doc(db, "picks", id));
+      showToast('"' + name + '" eliminado');
+    } catch(e) { showToast('Error al eliminar'); }
+  };
 
-  function askClearAll() {
-    document.getElementById('confirm-all').classList.add('visible');
-  }
-  function cancelConfirm() {
-    document.getElementById('confirm-all').classList.remove('visible');
-  }
-  function confirmClearAll() {
-    save([]);
-    cancelConfirm();
-    render();
-    showToast('Todas las predicciones eliminadas');
-  }
+  window.askClearAll = function() { document.getElementById('confirm-all').classList.add('visible'); };
+  window.cancelConfirm = function() { document.getElementById('confirm-all').classList.remove('visible'); };
+
+  window.confirmClearAll = async function() {
+    try {
+      const batch = writeBatch(db);
+      allPicks.forEach(p => batch.delete(doc(db, "picks", p.id)));
+      await batch.commit();
+      cancelConfirm();
+      showToast('Todas las predicciones eliminadas');
+    } catch(e) { showToast('Error al limpiar'); }
+  };
 
   function render() {
-    const picks = load();
-
-    // stats
-    document.getElementById('stat-total').textContent = picks.length;
+    document.getElementById('stat-total').textContent = allPicks.length;
 
     const grouped = {};
-    picks.forEach(p => {
+    allPicks.forEach(p => {
       const k = p.mex + ':' + p.sa;
       if (!grouped[k]) grouped[k] = { mex: p.mex, sa: p.sa, names: [] };
       grouped[k].names.push(p.name);
@@ -352,53 +159,27 @@
     document.getElementById('stat-distinct').textContent = sorted.length || 0;
     document.getElementById('stat-top').textContent = sorted.length ? sorted[0].mex + ':' + sorted[0].sa : '—';
 
-    // distribution
     const distEl = document.getElementById('dist-list');
-    if (!sorted.length) {
-      distEl.innerHTML = '<div class="empty">Sin datos aún.</div>';
-    } else {
-      distEl.innerHTML = sorted.map(g => `
-        <div class="dist-row">
-          <span class="dist-score">${g.mex} : ${g.sa}</span>
-          <span class="dist-names">${g.names.join(', ')}</span>
-          <span class="dist-count">${g.names.length}</span>
-        </div>`).join('');
-    }
+    distEl.innerHTML = sorted.length ? sorted.map(g => `
+      <div class="dist-row">
+        <span class="dist-score">${g.mex} : ${g.sa}</span>
+        <span class="dist-names">${g.names.join(', ')}</span>
+        <span class="dist-count">${g.names.length}</span>
+      </div>`).join('') : '<div class="empty">Sin datos aún.</div>';
 
-    // participant list
+    const flagMX = `<svg class="flag" width="16" height="11" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="48" fill="#006847"/><rect x="24" width="24" height="48" fill="#fff"/><rect x="48" width="24" height="48" fill="#CE1126"/></svg>`;
+    const flagSA = `<svg class="flag" width="16" height="11" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg"><rect width="72" height="8" fill="#007A4D"/><rect y="8" width="72" height="8" fill="#FFB81C"/><rect y="16" width="72" height="8" fill="#DE3831"/><rect y="24" width="72" height="8" fill="#002395"/><rect y="32" width="72" height="8" fill="#007A4D"/><rect y="40" width="72" height="8" fill="#FFB81C"/></svg>`;
+
     const partEl = document.getElementById('participant-list');
-    if (!picks.length) {
-      partEl.innerHTML = '<div class="empty">Sin participantes aún.</div>';
-    } else {
-      partEl.innerHTML = picks.map(p => `
-        <div class="participant-row">
-          <div class="p-info">
-            <span class="p-name">${p.name}</span>
-            <span class="p-score">
-              <svg width="16" height="11" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px">
-                <rect width="24" height="48" fill="#006847"/>
-                <rect x="24" width="24" height="48" fill="#fff"/>
-                <rect x="48" width="24" height="48" fill="#CE1126"/>
-              </svg>
-              ${p.mex} : ${p.sa}
-              <svg width="16" height="11" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px">
-                <rect width="72" height="8" fill="#007A4D"/>
-                <rect y="8" width="72" height="8" fill="#FFB81C"/>
-                <rect y="16" width="72" height="8" fill="#DE3831"/>
-                <rect y="24" width="72" height="8" fill="#002395"/>
-                <rect y="32" width="72" height="8" fill="#007A4D"/>
-                <rect y="40" width="72" height="8" fill="#FFB81C"/>
-              </svg>
-            </span>
-          </div>
-          <button class="btn-del" onclick="deletePick('${p.name.replace(/'/g, "\\'")}')">Borrar</button>
-        </div>`).join('');
-    }
+    partEl.innerHTML = allPicks.length ? allPicks.map(p => `
+      <div class="participant-row">
+        <div class="p-info">
+          <span class="p-name">${p.name}</span>
+          <span class="p-score">${flagMX} ${p.mex} : ${p.sa} ${flagSA}</span>
+        </div>
+        <button class="btn-del" onclick="deletePick('${p.id}', '${p.name.replace(/'/g,"\\'")}')">Borrar</button>
+      </div>`).join('') : '<div class="empty">Sin participantes aún.</div>';
   }
-
-  window.addEventListener('storage', render);
-  render();
-  setInterval(render, 3000);
 </script>
 </body>
 </html>
