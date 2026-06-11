@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Polla — México vs Sudáfrica · FIFA World Cup 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark: #006847;
+      --red-mx: #CE1126;
+      --gold: #FFB81C;
+      --sa-blue: #002395;
+      --sa-green: #007A4D;
+      --sa-red: #DE3831;
+      --bg: #0a1628;
+      --bg-card: #132035;
+      --bg-input: #1a2d47;
+      --border: rgba(255,255,255,0.10);
+      --border-hover: rgba(255,255,255,0.22);
+      --text: #f0f4ff;
+      --text-muted: rgba(240,244,255,0.55);
+      --accent: #FFB81C;
+      --danger: #ff4d4d;
+      --danger-bg: rgba(255,77,77,0.12);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      padding-bottom: 3rem;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .wc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,184,28,0.12);
+      border: 0.5px solid rgba(255,184,28,0.35);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .trophy-icon {
+      font-size: 14px;
+    }
+    .teams-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+    .team {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .team-name {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .vs {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+    }
+    .match-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ── FLAGS SVG ── */
+    .flag { display: block; border-radius: 4px; overflow: hidden; }
+
+    /* ── MAIN ── */
+    .main { max-width: 620px; margin: 0 auto; padding: 0 1rem; }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── FORM ── */
+    label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+      letter-spacing: 0.04em;
+    }
+    input[type="text"], input[type="number"] {
+      background: var(--bg-input);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 15px;
+      height: 40px;
+      padding: 0 12px;
+      width: 100%;
+      transition: border-color 0.15s;
+      outline: none;
+    }
+    input[type="text"]:focus, input[type="number"]:focus {
+      border-color: var(--border-hover);
+    }
+    .field { margin-bottom: 1rem; }
+
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+    .score-block {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .score-input {
+      width: 56px !important;
+      height: 52px !important;
+      font-size: 26px !important;
+      font-weight: 700 !important;
+      text-align: center;
+      padding: 0 !important;
+      border-radius: 10px !important;
+      border: 0.5px solid var(--border-hover) !important;
+    }
+    .score-sep {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 20px;
+      border-radius: 8px;
+      border: 0.5px solid var(--border-hover);
+      background: rgba(255,184,28,0.12);
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .btn:hover { background: rgba(255,184,28,0.22); }
+    .btn:active { transform: scale(0.97); }
+
+    .error {
+      font-size: 13px;
+      color: var(--danger);
+      margin-top: 4px;
+    }
+
+    /* ── RESULTS ── */
+    .counter {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      letter-spacing: 0.03em;
+    }
+    .result-group {
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.75rem;
+      transition: border-color 0.15s;
+    }
+    .result-group:hover { border-color: var(--border-hover); }
+    .result-score {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .score-display {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .people-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .names-row { display: flex; flex-wrap: wrap; gap: 4px; }
+    .name-chip {
+      background: rgba(255,255,255,0.07);
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 12px;
+      color: var(--text);
+    }
+    .empty {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wc-badge">
+    <span class="trophy-icon">🏆</span>
+    FIFA World Cup 2026
+  </div>
+  <div class="teams-row">
+    <div class="team">
+      <svg class="flag" width="72" height="48" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg">
+        <rect width="24" height="48" fill="#006847"/>
+        <rect x="24" width="24" height="48" fill="#fff"/>
+        <rect x="48" width="24" height="48" fill="#CE1126"/>
+        <circle cx="36" cy="24" r="8" fill="#6B8F3E" opacity="0.3"/>
+        <circle cx="36" cy="24" r="5" fill="#6B8F3E" opacity="0.4"/>
+      </svg>
+      <span class="team-name">México</span>
+    </div>
+    <span class="vs">VS</span>
+    <div class="team">
+      <svg class="flag" width="72" height="48" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg">
+        <rect width="72" height="8" fill="#007A4D"/>
+        <rect y="8" width="72" height="8" fill="#FFB81C"/>
+        <rect y="16" width="72" height="8" fill="#DE3831"/>
+        <rect y="24" width="72" height="8" fill="#002395"/>
+        <rect y="32" width="72" height="8" fill="#007A4D"/>
+        <rect y="40" width="72" height="8" fill="#FFB81C"/>
+        <polygon points="0,0 0,48 30,24" fill="#000"/>
+        <circle cx="12" cy="24" r="6" fill="#FFB81C" opacity="0.85"/>
+      </svg>
+      <span class="team-name">Sudáfrica</span>
+    </div>
+  </div>
+  <p class="match-meta">Grupo A · Estadio Azteca, Ciudad de México · 11 Jun 2026</p>
+</header>
+
+<main class="main">
+
+  <div class="card">
+    <div class="card-title">Tu predicción</div>
+    <div class="field">
+      <label>Nombre</label>
+      <input type="text" id="inp-name" placeholder="Ej: Carlos" maxlength="30"/>
+    </div>
+    <div class="score-row">
+      <div class="score-block">
+        <svg width="24" height="16" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg" style="border-radius:3px">
+          <rect width="24" height="48" fill="#006847"/>
+          <rect x="24" width="24" height="48" fill="#fff"/>
+          <rect x="48" width="24" height="48" fill="#CE1126"/>
+        </svg>
+        <input type="number" class="score-input" id="inp-mex" value="0" min="0" max="20"/>
+        <span class="score-sep">:</span>
+        <input type="number" class="score-input" id="inp-sa" value="0" min="0" max="20"/>
+        <svg width="24" height="16" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg" style="border-radius:3px">
+          <rect width="72" height="8" fill="#007A4D"/>
+          <rect y="8" width="72" height="8" fill="#FFB81C"/>
+          <rect y="16" width="72" height="8" fill="#DE3831"/>
+          <rect y="24" width="72" height="8" fill="#002395"/>
+          <rect y="32" width="72" height="8" fill="#007A4D"/>
+          <rect y="40" width="72" height="8" fill="#FFB81C"/>
+        </svg>
+      </div>
+      <button class="btn" onclick="addPick()">+ Agregar</button>
+    </div>
+    <div id="error-msg" class="error" style="display:none"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Resultados</div>
+    <div id="counter" class="counter" style="display:none"></div>
+    <div id="results-list">
+      <div class="empty">Aún no hay predicciones. ¡Sé el primero!</div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  const STORAGE_KEY = 'polla_mundial_2026_picks';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+  }
+  function save(picks) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(picks));
+  }
+
+  function addPick() {
+    const name = document.getElementById('inp-name').value.trim();
+    const mex  = parseInt(document.getElementById('inp-mex').value) || 0;
+    const sa   = parseInt(document.getElementById('inp-sa').value) || 0;
+    const err  = document.getElementById('error-msg');
+    const picks = load();
+
+    if (!name) { err.textContent = 'Por favor ingresa tu nombre.'; err.style.display = 'block'; return; }
+    if (picks.find(p => p.name.toLowerCase() === name.toLowerCase())) {
+      err.textContent = '"' + name + '" ya tiene una predicción registrada.';
+      err.style.display = 'block'; return;
+    }
+    err.style.display = 'none';
+    picks.push({ name, mex, sa });
+    save(picks);
+    document.getElementById('inp-name').value = '';
+    document.getElementById('inp-mex').value = '0';
+    document.getElementById('inp-sa').value = '0';
+    render();
+  }
+
+  function render() {
+    const picks = load();
+    const grouped = {};
+    picks.forEach(p => {
+      const k = p.mex + '-' + p.sa;
+      if (!grouped[k]) grouped[k] = { mex: p.mex, sa: p.sa, names: [] };
+      grouped[k].names.push(p.name);
+    });
+    const sorted = Object.values(grouped).sort((a,b) =>
+      b.names.length - a.names.length || (b.mex+b.sa)-(a.mex+a.sa));
+
+    const counter = document.getElementById('counter');
+    const list = document.getElementById('results-list');
+
+    if (!picks.length) {
+      counter.style.display = 'none';
+      list.innerHTML = '<div class="empty">Aún no hay predicciones. ¡Sé el primero!</div>';
+      return;
+    }
+    counter.style.display = 'block';
+    counter.textContent = picks.length + ' participante' + (picks.length !== 1 ? 's' : '')
+      + ' · ' + sorted.length + ' resultado' + (sorted.length !== 1 ? 's distintos' : ' distinto');
+
+    list.innerHTML = sorted.map(g => `
+      <div class="result-group">
+        <div class="result-score">
+          <svg width="20" height="14" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg" style="border-radius:3px">
+            <rect width="24" height="48" fill="#006847"/>
+            <rect x="24" width="24" height="48" fill="#fff"/>
+            <rect x="48" width="24" height="48" fill="#CE1126"/>
+          </svg>
+          <span class="score-display">${g.mex} : ${g.sa}</span>
+          <svg width="20" height="14" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg" style="border-radius:3px">
+            <rect width="72" height="8" fill="#007A4D"/>
+            <rect y="8" width="72" height="8" fill="#FFB81C"/>
+            <rect y="16" width="72" height="8" fill="#DE3831"/>
+            <rect y="24" width="72" height="8" fill="#002395"/>
+            <rect y="32" width="72" height="8" fill="#007A4D"/>
+            <rect y="40" width="72" height="8" fill="#FFB81C"/>
+          </svg>
+          ${g.names.length > 1 ? '<span class="people-count">(' + g.names.length + ' personas)</span>' : ''}
+        </div>
+        <div class="names-row">
+          ${g.names.map(n => '<span class="name-chip">' + n + '</span>').join('')}
+        </div>
+      </div>`).join('');
+  }
+
+  document.getElementById('inp-name').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addPick();
+  });
+
+  // Refresca si otra pestaña modifica el storage
+  window.addEventListener('storage', render);
+
+  render();
+</script>
+</body>
+</html>
