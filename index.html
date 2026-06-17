@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Polla — México vs Sudáfrica · FIFA World Cup 2026</title>
+  <title>Polla — Uzbekistán vs Colombia · FIFA World Cup 2026</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -54,25 +54,36 @@
   <div class="wc-badge">🏆 FIFA World Cup 2026</div>
   <div class="teams-row">
     <div class="team">
+      <!-- Bandera Uzbekistán: azul, blanco, verde con media luna -->
       <svg class="flag" width="72" height="48" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg">
-        <rect width="24" height="48" fill="#006847"/><rect x="24" width="24" height="48" fill="#fff"/><rect x="48" width="24" height="48" fill="#CE1126"/>
-        <circle cx="36" cy="24" r="7" fill="#6B8F3E" opacity="0.35"/>
+        <rect width="72" height="16" fill="#1EB53A"/>
+        <rect y="16" width="72" height="16" fill="#fff"/>
+        <rect y="32" width="72" height="16" fill="#CE1126"/>
+        <rect y="14" width="72" height="4" fill="#CE1126"/>
+        <rect y="30" width="72" height="4" fill="#1EB53A"/>
+        <!-- Luna y estrellas sobre franja verde superior -->
+        <circle cx="14" cy="8" r="5" fill="#fff"/>
+        <circle cx="16" cy="8" r="4" fill="#1EB53A"/>
+        <circle cx="24" cy="5" r="1.2" fill="#fff"/>
+        <circle cx="28" cy="3" r="1.2" fill="#fff"/>
+        <circle cx="32" cy="5" r="1.2" fill="#fff"/>
+        <circle cx="28" cy="8" r="1.2" fill="#fff"/>
+        <circle cx="24" cy="10" r="1.2" fill="#fff"/>
       </svg>
-      <span class="team-name">México</span>
+      <span class="team-name">Uzbekistán</span>
     </div>
     <span class="vs">VS</span>
     <div class="team">
+      <!-- Bandera Colombia: amarillo, azul, rojo -->
       <svg class="flag" width="72" height="48" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg">
-        <rect width="72" height="8" fill="#007A4D"/><rect y="8" width="72" height="8" fill="#FFB81C"/>
-        <rect y="16" width="72" height="8" fill="#DE3831"/><rect y="24" width="72" height="8" fill="#002395"/>
-        <rect y="32" width="72" height="8" fill="#007A4D"/><rect y="40" width="72" height="8" fill="#FFB81C"/>
-        <polygon points="0,0 0,48 28,24" fill="#000"/>
-        <circle cx="11" cy="24" r="5" fill="#FFB81C" opacity="0.9"/>
+        <rect width="72" height="24" fill="#FCD116"/>
+        <rect y="24" width="72" height="12" fill="#003087"/>
+        <rect y="36" width="72" height="12" fill="#CE1126"/>
       </svg>
-      <span class="team-name">Sudáfrica</span>
+      <span class="team-name">Colombia</span>
     </div>
   </div>
-  <p class="match-meta">Grupo A · Estadio Azteca, Ciudad de México · 11 Jun 2026</p>
+  <p class="match-meta">Grupo K · Copa Mundial FIFA 2026 · Hoy, 9:00 p.m.</p>
 </header>
 
 <main class="main">
@@ -84,16 +95,22 @@
     </div>
     <div class="score-row">
       <div class="score-block">
+        <!-- Flag mini Uzbekistán -->
         <svg class="flag" width="24" height="16" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg">
-          <rect width="24" height="48" fill="#006847"/><rect x="24" width="24" height="48" fill="#fff"/><rect x="48" width="24" height="48" fill="#CE1126"/>
+          <rect width="72" height="16" fill="#1EB53A"/>
+          <rect y="16" width="72" height="16" fill="#fff"/>
+          <rect y="32" width="72" height="16" fill="#CE1126"/>
+          <rect y="14" width="72" height="4" fill="#CE1126"/>
+          <rect y="30" width="72" height="4" fill="#1EB53A"/>
         </svg>
-        <input type="number" class="score-input" id="inp-mex" value="0" min="0" max="20"/>
+        <input type="number" class="score-input" id="inp-uzb" value="0" min="0" max="20"/>
         <span class="score-sep">:</span>
-        <input type="number" class="score-input" id="inp-sa" value="0" min="0" max="20"/>
+        <input type="number" class="score-input" id="inp-col" value="0" min="0" max="20"/>
+        <!-- Flag mini Colombia -->
         <svg class="flag" width="24" height="16" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg">
-          <rect width="72" height="8" fill="#007A4D"/><rect y="8" width="72" height="8" fill="#FFB81C"/>
-          <rect y="16" width="72" height="8" fill="#DE3831"/><rect y="24" width="72" height="8" fill="#002395"/>
-          <rect y="32" width="72" height="8" fill="#007A4D"/><rect y="40" width="72" height="8" fill="#FFB81C"/>
+          <rect width="72" height="24" fill="#FCD116"/>
+          <rect y="24" width="72" height="12" fill="#003087"/>
+          <rect y="36" width="72" height="12" fill="#CE1126"/>
         </svg>
       </div>
       <button class="btn" id="btn-add" onclick="addPick()">+ Agregar</button>
@@ -133,8 +150,8 @@
 
   window.addPick = async function() {
     const name = document.getElementById('inp-name').value.trim();
-    const mex  = parseInt(document.getElementById('inp-mex').value) || 0;
-    const sa   = parseInt(document.getElementById('inp-sa').value) || 0;
+    const uzb  = parseInt(document.getElementById('inp-uzb').value) || 0;
+    const col  = parseInt(document.getElementById('inp-col').value) || 0;
     const err  = document.getElementById('error-msg');
     const btn  = document.getElementById('btn-add');
 
@@ -145,24 +162,27 @@
     err.style.display = 'none';
     btn.disabled = true; btn.textContent = 'Guardando...';
     try {
-      await addDoc(picksCol, { name, mex, sa, createdAt: Date.now() });
+      await addDoc(picksCol, { name, uzb, col, createdAt: Date.now() });
       document.getElementById('inp-name').value = '';
-      document.getElementById('inp-mex').value = '0';
-      document.getElementById('inp-sa').value = '0';
+      document.getElementById('inp-uzb').value = '0';
+      document.getElementById('inp-col').value = '0';
     } catch(e) {
       err.textContent = 'Error al guardar. Intenta de nuevo.'; err.style.display = 'block';
     }
     btn.disabled = false; btn.textContent = '+ Agregar';
   };
 
+  const flagUZB = `<svg style="border-radius:2px;display:inline-block" width="20" height="14" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg"><rect width="72" height="16" fill="#1EB53A"/><rect y="16" width="72" height="16" fill="#fff"/><rect y="32" width="72" height="16" fill="#CE1126"/><rect y="14" width="72" height="4" fill="#CE1126"/><rect y="30" width="72" height="4" fill="#1EB53A"/></svg>`;
+  const flagCOL = `<svg style="border-radius:2px;display:inline-block" width="20" height="14" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg"><rect width="72" height="24" fill="#FCD116"/><rect y="24" width="72" height="12" fill="#003087"/><rect y="36" width="72" height="12" fill="#CE1126"/></svg>`;
+
   function render() {
     const grouped = {};
     allPicks.forEach(p => {
-      const k = p.mex + '-' + p.sa;
-      if (!grouped[k]) grouped[k] = { mex: p.mex, sa: p.sa, names: [] };
+      const k = p.uzb + '-' + p.col;
+      if (!grouped[k]) grouped[k] = { uzb: p.uzb, col: p.col, names: [] };
       grouped[k].names.push(p.name);
     });
-    const sorted = Object.values(grouped).sort((a,b) => b.names.length - a.names.length || (b.mex+b.sa)-(a.mex+a.sa));
+    const sorted = Object.values(grouped).sort((a,b) => b.names.length - a.names.length || (b.uzb+b.col)-(a.uzb+a.col));
     const counter = document.getElementById('counter');
     const list = document.getElementById('results-list');
     if (!allPicks.length) {
@@ -175,15 +195,9 @@
     list.innerHTML = sorted.map(g => `
       <div class="result-group">
         <div class="result-score">
-          <svg class="flag" width="20" height="14" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg">
-            <rect width="24" height="48" fill="#006847"/><rect x="24" width="24" height="48" fill="#fff"/><rect x="48" width="24" height="48" fill="#CE1126"/>
-          </svg>
-          <span class="score-display">${g.mex} : ${g.sa}</span>
-          <svg class="flag" width="20" height="14" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg">
-            <rect width="72" height="8" fill="#007A4D"/><rect y="8" width="72" height="8" fill="#FFB81C"/>
-            <rect y="16" width="72" height="8" fill="#DE3831"/><rect y="24" width="72" height="8" fill="#002395"/>
-            <rect y="32" width="72" height="8" fill="#007A4D"/><rect y="40" width="72" height="8" fill="#FFB81C"/>
-          </svg>
+          ${flagUZB}
+          <span class="score-display">${g.uzb} : ${g.col}</span>
+          ${flagCOL}
           ${g.names.length > 1 ? '<span class="people-count">(' + g.names.length + ' personas)</span>' : ''}
         </div>
         <div class="names-row">${g.names.map(n => '<span class="name-chip">' + n + '</span>').join('')}</div>

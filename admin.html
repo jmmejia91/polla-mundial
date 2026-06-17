@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin — Polla México vs Sudáfrica</title>
+  <title>Admin — Polla Uzbekistán vs Colombia</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -35,7 +35,6 @@
     .p-score { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
     .btn-del { background: var(--danger-bg); border: 0.5px solid var(--danger-border); border-radius: 7px; color: var(--danger); font-size: 12px; font-weight: 600; padding: 5px 12px; cursor: pointer; transition: background 0.15s; }
     .btn-del:hover { background: rgba(255,77,77,0.2); }
-    .btn-del:disabled { opacity: 0.4; cursor: not-allowed; }
     .confirm-zone { background: var(--danger-bg); border: 0.5px solid var(--danger-border); border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1rem; display: none; }
     .confirm-zone.visible { display: block; }
     .confirm-zone p { font-size: 13px; color: var(--danger); margin-bottom: 0.75rem; font-weight: 600; }
@@ -55,7 +54,6 @@
     .loading { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 13px; }
     .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(60px); background: #1a2d47; border: 0.5px solid var(--border-hover); border-radius: 10px; padding: 10px 20px; font-size: 13px; color: var(--success); font-weight: 600; opacity: 0; transition: transform 0.25s ease, opacity 0.25s ease; pointer-events: none; white-space: nowrap; }
     .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-    .flag { border-radius: 2px; display: inline-block; }
   </style>
 </head>
 <body>
@@ -63,7 +61,7 @@
 <header class="header">
   <div class="header-left">
     <span class="admin-badge">Admin</span>
-    <span class="header-title">México vs Sudáfrica</span>
+    <span class="header-title">Uzbekistán vs Colombia</span>
   </div>
   <a href="index.html" class="back-link">← Ver polla</a>
 </header>
@@ -121,16 +119,13 @@
 
   function showToast(msg) {
     const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
+    t.textContent = msg; t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2200);
   }
 
   window.deletePick = async function(id, name) {
-    try {
-      await deleteDoc(doc(db, "picks", id));
-      showToast('"' + name + '" eliminado');
-    } catch(e) { showToast('Error al eliminar'); }
+    try { await deleteDoc(doc(db, "picks", id)); showToast('"' + name + '" eliminado'); }
+    catch(e) { showToast('Error al eliminar'); }
   };
 
   window.askClearAll = function() { document.getElementById('confirm-all').classList.add('visible'); };
@@ -146,36 +141,35 @@
     } catch(e) { showToast('Error al limpiar'); }
   };
 
+  const flagUZB = `<svg style="border-radius:2px;display:inline-block" width="16" height="11" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg"><rect width="72" height="16" fill="#1EB53A"/><rect y="16" width="72" height="16" fill="#fff"/><rect y="32" width="72" height="16" fill="#CE1126"/><rect y="14" width="72" height="4" fill="#CE1126"/><rect y="30" width="72" height="4" fill="#1EB53A"/></svg>`;
+  const flagCOL = `<svg style="border-radius:2px;display:inline-block" width="16" height="11" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg"><rect width="72" height="24" fill="#FCD116"/><rect y="24" width="72" height="12" fill="#003087"/><rect y="36" width="72" height="12" fill="#CE1126"/></svg>`;
+
   function render() {
     document.getElementById('stat-total').textContent = allPicks.length;
-
     const grouped = {};
     allPicks.forEach(p => {
-      const k = p.mex + ':' + p.sa;
-      if (!grouped[k]) grouped[k] = { mex: p.mex, sa: p.sa, names: [] };
+      const k = p.uzb + ':' + p.col;
+      if (!grouped[k]) grouped[k] = { uzb: p.uzb, col: p.col, names: [] };
       grouped[k].names.push(p.name);
     });
     const sorted = Object.values(grouped).sort((a,b) => b.names.length - a.names.length);
     document.getElementById('stat-distinct').textContent = sorted.length || 0;
-    document.getElementById('stat-top').textContent = sorted.length ? sorted[0].mex + ':' + sorted[0].sa : '—';
+    document.getElementById('stat-top').textContent = sorted.length ? sorted[0].uzb + ':' + sorted[0].col : '—';
 
     const distEl = document.getElementById('dist-list');
     distEl.innerHTML = sorted.length ? sorted.map(g => `
       <div class="dist-row">
-        <span class="dist-score">${g.mex} : ${g.sa}</span>
+        <span class="dist-score">${g.uzb} : ${g.col}</span>
         <span class="dist-names">${g.names.join(', ')}</span>
         <span class="dist-count">${g.names.length}</span>
       </div>`).join('') : '<div class="empty">Sin datos aún.</div>';
-
-    const flagMX = `<svg class="flag" width="16" height="11" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="48" fill="#006847"/><rect x="24" width="24" height="48" fill="#fff"/><rect x="48" width="24" height="48" fill="#CE1126"/></svg>`;
-    const flagSA = `<svg class="flag" width="16" height="11" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg"><rect width="72" height="8" fill="#007A4D"/><rect y="8" width="72" height="8" fill="#FFB81C"/><rect y="16" width="72" height="8" fill="#DE3831"/><rect y="24" width="72" height="8" fill="#002395"/><rect y="32" width="72" height="8" fill="#007A4D"/><rect y="40" width="72" height="8" fill="#FFB81C"/></svg>`;
 
     const partEl = document.getElementById('participant-list');
     partEl.innerHTML = allPicks.length ? allPicks.map(p => `
       <div class="participant-row">
         <div class="p-info">
           <span class="p-name">${p.name}</span>
-          <span class="p-score">${flagMX} ${p.mex} : ${p.sa} ${flagSA}</span>
+          <span class="p-score">${flagUZB} ${p.uzb} : ${p.col} ${flagCOL}</span>
         </div>
         <button class="btn-del" onclick="deletePick('${p.id}', '${p.name.replace(/'/g,"\\'")}')">Borrar</button>
       </div>`).join('') : '<div class="empty">Sin participantes aún.</div>';
